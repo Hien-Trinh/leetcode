@@ -1,0 +1,20 @@
+#
+# @lc app=leetcode id=48 lang=python3
+#
+# [48] Rotate Image
+#
+
+# @lc code=start
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        for i in range(len(matrix)):
+            matrix[i] = matrix[i][::-1]
+
+        for i in range(len(matrix)):
+            for j in range(len(matrix) - i):
+                matrix[i][j], matrix[len(matrix) - j - 1][len(matrix) - i - 1] = matrix[len(
+                    matrix) - j - 1][len(matrix) - i - 1], matrix[i][j]
+# @lc code=end
