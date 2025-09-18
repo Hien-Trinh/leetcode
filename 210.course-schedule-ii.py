@@ -11,26 +11,25 @@ from collections import defaultdict, deque
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = defaultdict(list)
-        numPrerequisite = [0] * numCourses
+        numPrereq = [0] * numCourses
         queue = deque()
-        out = []
+        ans = []
 
-        for course, prerequisite in prerequisites:
-            graph[prerequisite].append(course)
-            numPrerequisite[course] += 1
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+            numPrereq[course] += 1
 
         for course in range(numCourses):
-            if numPrerequisite[course] == 0:
+            if numPrereq[course] == 0:
                 queue.append(course)
 
         while queue:
-            prerequisite = queue.popleft()
-            out.append(prerequisite)
-
-            for course in graph[prerequisite]:
-                numPrerequisite[course] -= 1
-                if numPrerequisite[course] == 0:
+            prereq = queue.popleft()
+            ans.append(prereq)
+            for course in graph[prereq]:
+                numPrereq[course] -= 1
+                if numPrereq[course] == 0:
                     queue.append(course)
 
-        return out if len(out) == numCourses else []
+        return ans if len(ans) == numCourses else []
 # @lc code=end
