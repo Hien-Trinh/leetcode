@@ -22,12 +22,17 @@ class Solution:
         for _ in range(left - 1):
             prev = prev.next
 
-        cur = prev.next
+        l = prev
+        prev = prev.next
+        curr = prev.next
         for _ in range(right - left):
-            temp = cur.next
-            cur.next = temp.next
-            temp.next = prev.next
-            prev.next = temp
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+
+        l.next.next = curr
+        l.next = prev
 
         return dummy.next
 # @lc code=end
