@@ -7,10 +7,11 @@
 # @lc code=start
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        dp = [* nums]
+        curr_max, all_max = nums[0], nums[0]
 
         for i in range(1, len(nums)):
-            dp[i] = max(nums[i], dp[i - 1] + nums[i])
+            curr_max = max(curr_max + nums[i], nums[i])
+            all_max = max(all_max, curr_max)
 
-        return max(dp)
+        return all_max
 # @lc code=end
