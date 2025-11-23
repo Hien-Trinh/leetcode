@@ -13,7 +13,7 @@ class Solution:
 
         def coord(pos):
             r, c = divmod(pos - 1, n)
-            c = c if r % 2 == 0 else n - c - 1
+            c = c if r % 2 == 0 else c
             r = n - r - 1
 
             return r, c

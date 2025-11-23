@@ -11,20 +11,28 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from collections import deque
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        def dfs(node, depth):
-            if node:
-                if depth >= len(out):
-                    out.append([])
-                if depth % 2 == 0:
-                    out[depth].append(node.val)
-                else:
-                    out[depth].insert(0, node.val)
+        if not root:
+            return []
 
-                dfs(node.left, depth + 1)
-                dfs(node.right, depth + 1)
+        q = deque([root])
         out = []
-        dfs(root, 0)
+        flipped = False
+        while q:
+            cur = []
+            for _ in range(len(q)):
+                node = q.popleft()
+                cur.append(node.val)
+                if node.left: q.append(node.left)
+                if node.right: q.append(node.right)
+
+            if flipped:
+                out.append(cur[::-1])
+            else:
+                out.append(cur)
+
+            flipped = not flipped
         return out
 # @lc code=end
